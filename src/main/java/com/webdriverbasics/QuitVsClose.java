@@ -15,10 +15,11 @@ public class QuitVsClose {
             //SID - ChromeDriver: chrome on windows (173f0ee79a96e8c6b9b7152fd00a9439)
             System.out.println("title is.."+title );
             System.out.println("current Title is...."+ currentURL); //123
-            driver.quit();
+           // driver.quit();  // org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+            driver.close(); // org.openqa.selenium.NoSuchSessionException: invalid session id (Seassion ID Is not null
             System.out.println(driver.getTitle());
             //SID - Null
-           // org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+          
 			}
 
 		}
