@@ -1,0 +1,7 @@
+
+
+/*Locator ID
+
+https://naveenautomationlabs.com/opencart/index.php?route=account/login
+By emailID = By.id("input-email");
+By password = By.id("input-password");

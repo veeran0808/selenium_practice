@@ -1,0 +1,103 @@
+static WebDriver driver;
+
+	public static void main(String[] args) {
+		
+		driver = new ChromeDriver();
+		driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
+----------------------------------------------------------------------------------
+/****** 1nd Approach - webElement Locator****************************/
+-->Create a web Element + Perform action (click,sendkeys,GetText,isDisplayed)
+-->Create a webElement - Need locator
+
+driver.findElement(By.id("input-email")).sendKeys("gopikrishnaveera@gmail.com");
+driver.findElement(By.id("input-password")).sendKeys("veera123");
+---------------------------------------------------------------------------
+/*********2nd Approach - webElement Locator - WebElement*******************
+Note : WebElement will hit every time to the server
+		
+WebElement emailID = driver.findElement(By.id("input-email"));
+WebElement pwd = driver.findElement(By.id("input-password"));
+
+emailID.sendKeys("gopikrishnaveera@gmail.com");
+pwd.sendKeys("veera123");
+----------------------------------------------------------------------------
+/**********3rd Approach - Webelement Locator - By Locator**************
+Note: By Locator not hitting the server it acts like Object repository
+
+By emailID1 = By.id("input-email");
+By pwd2 = By.id("input-password");
+
+WebElement eid = driver.findElement(emailID1);
+WebElement pwdd = driver.findElement(pwd2);
+
+eid.sendKeys("veera123");
+pwdd.sendKeys("veera123");
+------------------------------------------------------------------------------
+/*********4TH Approach - By Locator + generic method for the WebElement****
+By emailID2 = By.id("input-email");
+By pwd3 = By.id("input-password");
+
+getElement(emailID2).sendKeys("veer@gmail.com");
+getElement(pwd3).sendKeys("abce123");
+
+//Create a generic method for WebElement
+public static WebElement getElement(By locator) {
+		return driver.findElement(locator);
+	}
+---------------------------------------------------------------------------
+/*****5th Approach - By Locator + generic method for the WebElement & Action
+By emailID3 = By.id("input-email");
+By pwd4 = By.id("input-password");
+doSendkeys(emailID3, "abc123");
+doSendkeys(pwd4, "krish345");
+	}
+
+//Generic Method for Locator
+public static WebElement getElement(By locator) {
+	return driver.findElement(locator);
+	}
+	
+//Generic method for SendKeys() - Enter data
+public static void doSendkeys(By locator, String value) {
+		getElement(locator).sendKeys(value);
+	}
+----------------------------------------------------------------------------
+/****6TH Approach - By locator + Generic method for webElement & SendKey
+in "ElementUtil" class
+
+public class ElementUtil {
+
+	private WebDriver driver;
+
+	// Create construct method
+	public ElementUtil(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	/*
+	 * * Q: Why we initialize WebDriver as private? Ans: if we make it public any
+	 * one can use this object & may get null point exception. to avoid null will
+	 * use private
+	 * 
+	 */
+	public WebElement getElement(By locator) {
+		return driver.findElement(locator);
+	}
+
+	public void doSendkeys(By locator, String value) {
+		getElement(locator).sendKeys(value);
+	}
+	
+----------------------------
+	static WebDriver driver;
+
+	public static void main(String[] args) {
+		driver = new ChromeDriver();
+		driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/login");
+		//Create a object for ElementUtil class
+		ElementUtil eleUtil = new ElementUtil(driver);
+		By emailID = By.id("input-email");
+		By password = By.id("input-password");
+		eleUtil.doSendkeys(emailID, "gopikrishinaveera@gmail.com");
+		eleUtil.doSendkeys(password, "abc123");
+	}
