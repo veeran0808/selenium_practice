@@ -19,15 +19,24 @@ public class ElementUtil {
 	 * use private
 	 * 
 	 */
+	//Get Element
 	public WebElement getElement(By locator) {
 		return driver.findElement(locator);
 	}
-
+    
+	//sendKeys() - generic method
 	public void doSendkeys(By locator, String value) {
 		getElement(locator).sendKeys(value);
 	}
 
+	//click() - generic method
 	public void doClick(By locator) {
 		getElement(locator).click();
+	}
+
+	//getText() - generic method
+	public String doElementGetText(By locator) {
+		return getElement(locator).getText();
+
 	}
 }
