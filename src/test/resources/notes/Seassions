@@ -1,0 +1,28 @@
+
+
+
+Elements: 
+1.ID
+2.name
+3.className
+4.xpath
+5.css
+6.linkText
+7.partial Link Text
+8.TagName
+
+Selenium methods Methods: 
+
+-> launch browser
+-> maximize the window
+-> Delete cookies
+-> close() ->  the window 
+-> quit()-> quit the window
+-> click() -> the button/radio button/ check box/link
+-> sendKeys() -> Ente data in text box
+-> getText() -> 
+1.getElement
+2.sendKeys
+3.click 
+4.getText
+
