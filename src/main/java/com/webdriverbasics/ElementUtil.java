@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class ElementUtil {
 
@@ -88,4 +89,65 @@ public class ElementUtil {
 		return getElement(locator).getAttribute(attrName);
 	}
 
+//********************Select based Drop-Down Utilis************************************************//
+	public void doSelectDropDownByIndex(By locator, int index) {
+		Select select = new Select(getElement(locator));
+		select.selectByIndex(index);
+	}
+
+	public void doSelectDropDownByValue(By locator, String value) {
+		Select select = new Select(getElement(locator));
+		select.selectByValue(value);
+	}
+
+	public void doSelectDropDownByVisibleText(By locator, String text) {
+		Select select = new Select(getElement(locator));
+		select.selectByVisibleText(text);
+	}
+
+	public List<WebElement> getDropDownList(By locator) {
+		Select select = new Select(getElement(locator));
+		return select.getOptions();
+	}
+
+	public List<String> getTotalDropDownTextList(By locator) {
+		List<WebElement> optionsList = getDropDownList(locator);
+		List<String> optionsTextList = new ArrayList<String>();
+		for (WebElement e : optionsList) {
+			String text = e.getText();
+			optionsTextList.add(text);
+		}
+		return optionsTextList;
+	}
+
+	public int getTotalDropDownOptions(By locator) {
+		return getDropDownList(locator).size();
+	}
+
+	// If select methods not working then use this method
+	public void SelectDropdownValue(By locator, String expvalue) {
+		List<WebElement> optionsList = getDropDownList(locator);
+		for (WebElement e : optionsList) {
+			String text = e.getText();
+			System.out.println(text);
+			if (text.equals(expvalue)) {
+				e.click();
+				break;
+			}
+
+		    }
+			}
+	public void doSearch(By suggListLocator, String sugName) {
+		List<WebElement> sugList = getElements(suggListLocator);
+		for (WebElement e : sugList) {
+			String text = e.getText();
+			System.out.println(text);
+			if (text.contains(sugName)) {
+				e.click();
+				break;
+			}
+		}
+			
+//*****************************************************************************************************************//
+	}
 }

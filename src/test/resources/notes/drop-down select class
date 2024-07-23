@@ -1,0 +1,70 @@
+-------------------------------------------------------------------------------------------------------------------
+Drop-Down
+------------------------------------------------------------------------------------------------------------------
+Note 1: In select class we have to pass WebElement
+
+Pre-condition : The drop-down HTML Tag should be <select> tag, it will not work for other tags
+--------------------------------------------------------------------------------------------------------------------
+By country = By.id("Form_getForm_Country");
+WebElement country_ele = driver.findElement(country);
+		
+// Use select class for drop-down
+Select select = new Select(country_ele); // Pass webelement here
+
+// 1.Select by "Index"
+select.selectByIndex(1);
+
+// 2.Select by "value"
+select.selectByValue("belgium"); // Value attribute
+
+// 3.Select by "visibleText"
+select.selectByVisibleText("India"); // Text of the option *Recommended
+		
+------------------------------------------------------------------------------------
+Create Generic methods
+------------------------------------------------------------------------------------------
+	public void doSelectDropDownByIndex(By locator, int index) {
+		Select select = new Select(getElement(locator));
+		select.selectByIndex(index);
+	}
+
+	public void doSelectDropDownByValue(By locator, String value) {
+		Select select = new Select(getElement(locator));
+		select.selectByValue(value);
+	}
+
+	public void doSelectDropDownByVisibleText(By locator, String text) {
+		Select select = new Select(getElement(locator));
+		select.selectByVisibleText(text);
+	}
+---------------------------------------------------------------------------------------------------------------------
+Use Generic methods 
+---------------------------------------------------------------------------------------------------------------------
+By country = By.id("Form_getForm_Country"); // By locator
+doSelectDropDownByIndex(country, 3); //use generic method
+doSelectDropDownByValue(country, "Belgium");
+doSelectDropDownByVisibleText(country, "India");
+-----------------------------------------------------------------------------------------------------------------------
+Q: With using select class methods "selectByIndex,selectByValue,selectByVisibleText" Select a country from the 
+Drop-Down?
+------------------------------------------------------------------------------------------------------------------
+	static WebDriver driver;
+
+	public static void main(String[] args) {
+		driver = new ChromeDriver();
+		driver.get("https://www.orangehrm.com/30-day-free-trial"
+				+ "/");
+		By country = By.id("Form_getForm_Country");
+		WebElement country_ele = driver.findElement(country);
+		Select select = new Select(country_ele);
+		List<WebElement> countryList = select.getOptions();
+		System.out.println(countryList.size()-1);
+		
+		for(WebElement e : countryList) {
+			String text =e.getText();
+			if(text.equals("Brazil")) {
+				e.click();
+				break;
+			}
+		}
+-----------------------------------------------------------------------------------------------------------------------
