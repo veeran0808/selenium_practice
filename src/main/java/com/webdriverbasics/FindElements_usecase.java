@@ -21,12 +21,7 @@ public class FindElements_usecase {
 		
 	}
 
-	//Give the total size present for specific locator
-	public static int getTotalElementCount(By locator) {
-		int eleCount = getElements(locator).size();
-		System.out.println("total elements is.."+locator+"---->"+eleCount);
-		return eleCount;
-	}
+	
 	
 	// getAttribute() - generic method
 		public void getElementsAttribute(By locator, String attrName) {
@@ -42,4 +37,10 @@ public class FindElements_usecase {
 	public static List<WebElement> getElements(By locator) {
 		return driver.findElements(locator);
 	}
+	//Give the total size present for specific locator
+		public static int getTotalElementCount(By locator) {
+			int eleCount = getElements(locator).size();
+			System.out.println("total elements is.."+locator+"---->"+eleCount);
+			return eleCount;
+		}
 }
